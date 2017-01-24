@@ -113,10 +113,20 @@ public class List<T> {
 		return cloneList;
 	}
 
-// 	public List<T> concatClone(List<T> list){
-//		// TODO e)
-//
-//	}
+ 	// Vorteile clone: Einfaches umhängen führt zur neuen Liste. Schnelle Operation
+	// Vorteile concatClone: erzeugt neue Liste, Änderungen an den Ursprungslisten haben keinen Einfluss auf neue Liste
+	public List<T> concatClone(List<T> list){
+		// TODO e)
+		List<T>  concatCloneList1 	= this.clone();		 	 //Klonlisten werden erzeugt
+		List<T>  concatCloneList2 	= list.clone();
+		Entry<T> last 				= concatCloneList1.head; //Iterationselement
+		while (last.getNext() != null){
+			last = last.getNext();
+		}
+		last.setNext(concatCloneList2.head);
+		concatCloneList1.size += concatCloneList2.size();
+		return concatCloneList1;
+	}
 
 //	public List<T> reverse() {
 //		// TODO f)
