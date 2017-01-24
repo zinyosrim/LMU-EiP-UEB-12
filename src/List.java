@@ -113,10 +113,10 @@ public class List<T> {
 		return cloneList;
 	}
 
- 	public List<T> concatClone(List<T> list){
-		// TODO e)
-		
-	}
+// 	public List<T> concatClone(List<T> list){
+//		// TODO e)
+//
+//	}
 
 //	public List<T> reverse() {
 //		// TODO f)
