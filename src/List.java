@@ -39,16 +39,12 @@ public class List<T> {
 
 	public void postfix(Entry<T> newLast) {
 		// TODO b)
-		if (this.isEmpty()){
-			this.head = newLast;
-		}
-		else{
+		if (this.isEmpty())
+			this.head = newLast;									//Wenn Liste leer, mache newLast das 1. Element
+		else{														//sonst...
 			Entry<T> e = this.head;
-			while (e.getNext() != null){
-				e = e.getNext();
-			}
-			e.setNext(newLast);
-			newLast.setNext(null);
+			while ( e.getNext() != null ) e = e.getNext();			//... iteriere bis zum letzten Element
+			e.setNext(newLast);										//setze den Zeiger vom Letzten auf newLast
 		}
 		this.size++;
 	}
@@ -96,37 +92,33 @@ public class List<T> {
 
 	public List<T> clone(){
 		// TODO d)
-		List<T> cloneList	= new List<T>();					//erzeuge leere Clone-Liste
-		Entry<T> entry		= this.head;						//Iterationselement für Ursprungsliste
+		List<T> cloneList	= new List<T>();						//erzeuge leere Clone-Liste
+		Entry<T> entry		= this.head;							//Iterationselement für Ursprungsliste
 
-		for (int i = 0; i < this.size; i++){					//solange Ende der Ursprungsliste nicht erreicht...
+		for (int i = 0; i < this.size; i++){						//solange Ende der Ursprungsliste nicht erreicht...
 			cloneList.postfix(new Entry<T>(entry.getElement()));	//erzeuge neues Entry und hänge es an die Liste
-			entry = entry.getNext();							//setze Iterations-Entry auf das Nächste
+			entry = entry.getNext();								//setze Iterations-Entry auf das Nächste
 		}
 		return cloneList;
 	}
 
 	public List<T> concatClone(List<T> list){
 		// TODO e)
-
-		List<T>  concatCloneList 	= this.clone();		 	 //Klonlisten werden erzeugt
+		List<T>  concatCloneList 	= this.clone();		 	 		//Klonlisten werden erzeugt
 		List<T>  concatCloneList2 	= list.clone();
-		Entry<T> entry 				= concatCloneList.head;  //Iterationselement
-		while (entry.getNext() != null){						 //gehe zum letzten Entry der 1. Liste
+		Entry<T> entry 				= concatCloneList.head;  		//Iterationselement
+		while (entry.getNext() != null)							 	//gehe zum letzten Entry der 1. Liste
 			entry = entry.getNext();
-		}
-		entry.setNext(concatCloneList2.head); //Setze den Zeiger auf das 1. Element von Kopie von Liste 2
-
-		concatCloneList.size = this.size + list.size();
+		entry.setNext(concatCloneList2.head); 						//Setze den Zeiger auf 1. Elem. von Copy von Liste 2
+		concatCloneList.size 		= concatCloneList.size()
+									+ concatCloneList2.size();
 		return concatCloneList;
-
 	}
 
 	public List<T> reverse() {
 		// TODO f)
-		List<T>  reverseList 	= new List<T>(); 	//initialisiere neue Liste
-		Entry<T> currentEntry	= this.head;		//Iterationselement für Ursprungsliste
-
+		List<T>  reverseList 		= new List<T>(); 				//initialisiere neue Liste
+		Entry<T> currentEntry		= this.head;					//Iterationselement für Ursprungsliste
 		//gehe Ursprungsliste durch und setze das jeweils aktuelle Element an den Anfang der reverseList
 		for (int counter = 0; counter <= this.size+1; counter++){
 			reverseList.prefix ( new Entry<T>( currentEntry.getElement() ) );
