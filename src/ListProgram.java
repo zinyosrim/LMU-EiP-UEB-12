@@ -52,6 +52,7 @@ public class ListProgram{
 		list5.postfix(2);
 		list5.postfix(5);
 		list5.postfix(22);
+		list5.postfix(22);
 
 		System.out.println("list5: "+list5);
 
