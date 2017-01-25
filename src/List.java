@@ -139,10 +139,10 @@ public class List<T> {
 					other = temp;
 					this.size--;									//Duplikat entfernt, dekrementiere Listengroesse
 				}
-				temp = other;
+				temp = other;                                       //mache weiter, es kann ja weitere Duplikate geben
 				other = other.getNext();
 			}
-			current = current.getNext();
+			current = current.getNext();                            //äussere Schleife, gehe zum nächsten El. weiter
 		}
 	}
 
