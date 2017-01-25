@@ -130,10 +130,10 @@ public class List<T> {
 	public void removeDuplicates() {
 		// TODO g)
 		Entry<T> current = this.head; 								//Laufvariable äussere Schleife
-		while (current.getNext() != null){
+		while (current != null){                                    //durchlaufe Liste bis zum Ende
 			Entry<T> other = current.getNext(); 					//Laufvariable innere Schleife
 			Entry<T> temp=current;									//Speichervariable für Vorgänger vom Duplikat
-			while (other.getNext() != null){
+			while (other != null){                                  //Durchlaufe alle Nachfolger bis zum Ende
 				if (current.getElement() == other.getElement() ){	//Duplikat gefunden? -> entferne es
 					temp.setNext(other.getNext());					//Setze Zeiger vom Vorgänger auf Nachfolger
 					other = temp;
