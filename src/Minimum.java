@@ -11,7 +11,7 @@ public class Minimum<T> {
         try{
             Arrays.sort(arr);
             return arr[0];
-        } catch(ClassCastException e){ System.out.println("getMinimum = null ! Keine vergleichbaren Werte im Array"); return null;}
+        } catch(ClassCastException e){ System.out.println("ClassCastException: getMinimum = null, Minimum im Array ist nicht bestimmbar."); return null;}
 
     }
 }
