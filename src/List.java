@@ -46,10 +46,6 @@ public class List<T> {
 		e.setNext(newLast);
 		newLast.setNext(null);
 		this.size++;
-
-
-
-
 	}
 
 	public void postfix(T element) {
@@ -83,54 +79,61 @@ public class List<T> {
 
 	public void concat(List<T> list){
 		// TODO c)
+
 		Entry<T> e = this.head;
 		while (e.getNext() != null){
 			e = e.getNext();
 		}
 		e.setNext(list.head);
 		this.size += list.size();
-
-
 	}
+
 
 	public List<T> clone(){
 		// TODO d)
-		Entry<T> e 			= this.head;				 //Iterations-Entry für zu klonende Liste
-		Entry<T> newEntry;								 //Variable zur Speicherung des neuen Klon-Entry
-		List<T>  cloneList 	= new List();				 //Klonliste wird erzeugt
-		Entry<T> prev 		= new Entry(e.getElement()); //vorheriges Entry wird zwischengespeichert
+		List<T> cloneList	= new List<T>();					//erzeuge leere Clone-Liste
+		Entry<T> entry		= this.head;						//Iterationselement für Ursprungsliste
 
-		cloneList.size		= this.size;				 //Initialisierung der zu klonenden Liste
-		cloneList.head		= prev;
-
-		while (e.getNext() != null){					 //solange Ende der zu klonenen Liste nicht erreicht ...
-			e				= e.getNext();				 //iteriere in Ursprungsliste ein Element weiter
-			newEntry		= new Entry(e.getElement()); //erzeuge neues Clone-Entry mit Ursprungswert
-			cloneList.postfix(newEntry);				 //hänge das Element an Klonliste hintendran
-			prev.setNext(newEntry);						 //setze Zeiger vom vorherigen Element
-			prev			=	newEntry;				 //Zwischenspeichern vom aktuellen Klon-Element
+		for (int i = 0; i < this.size; i++){					//solange Ende der Ursprungsliste nicht erreicht...
+			cloneList.prefix(new Entry<T>(entry.getElement()));	//erzeuge neues Entry und hänge es an die Liste
+			entry = entry.getNext();							//setze Iterations-Entry auf das Nächste
 		}
 		return cloneList;
 	}
 
- 	// Vorteile clone: Einfaches umhängen führt zur neuen Liste. Schnelle Operation
-	// Vorteile concatClone: erzeugt neue Liste, Änderungen an den Ursprungslisten haben keinen Einfluss auf neue Liste
 	public List<T> concatClone(List<T> list){
 		// TODO e)
-		List<T>  concatCloneList1 	= this.clone();		 	 //Klonlisten werden erzeugt
-		List<T>  concatCloneList2 	= list.clone();
-		Entry<T> last 				= concatCloneList1.head; //Iterationselement
-		while (last.getNext() != null){
+
+		List<T>  concatCloneList 	= this.clone();		 	 //Klonlisten werden erzeugt
+		Entry<T> last 				= concatCloneList.head;  //Iterationselement
+		System.out.println("concatclone  this.size "+this.size+" list.size "+list.size());
+		while (last.getNext() != null){						 //gehe zum letzten Entry der 1. Liste
 			last = last.getNext();
 		}
-		last.setNext(concatCloneList2.head);
-		concatCloneList1.size += concatCloneList2.size();
-		return concatCloneList1;
+		last.setNext(list.head); //Setze den Zeiger auf das 1. Element von Liste 2
+
+		concatCloneList.size = this.size + list.size();
+		System.out.println("concatCloneList.size "+concatCloneList.size());
+		System.out.println(concatCloneList);
+		return concatCloneList;
+		/* clone: Einfaches Umhängen führt zur neuen Liste. Schnelle Operation. Allerdings wenn
+		   nachträgliche Änderungen an den ursprünglichen Listen erfolgen, kann die ungewollte Effekte haben.
+		   concatClone: erzeugt neue Liste, Änderungen an den Ursprungslisten haben
+		   keinen Einfluss auf neue Liste. Dafür ist es langsamer als clone, weil man um die Kopien
+		    zu erzeugen durch die Listen iterieren muss -> lineare Komplexität */
 	}
 
-//	public List<T> reverse() {
-//		// TODO f)
-//	}
+	public List<T> reverse() {
+		// TODO f)
+		List<T>  reverseList 	= new List<T>(); 	//initialisiere neue Liste
+		Entry<T> currentEntry	= this.head;		//Iterationselement für Ursprungsliste
+
+		for (int counter = 0; counter <= this.size+1; counter++){
+			reverseList.prefix ( new Entry<T>( currentEntry.getElement() ) );
+			currentEntry = currentEntry.getNext();
+		}
+		return reverseList;
+	}
 
 	public void removeDuplicates() {
 		// TODO g)
