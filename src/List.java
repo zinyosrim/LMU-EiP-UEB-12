@@ -90,14 +90,12 @@ public class List<T> {
 	}
 
 
-	public List<T> clone(){
-		// TODO d)
-		List<T> cloneList	= new List<T>();						//erzeuge leere Clone-Liste
-		Entry<T> entry		= this.head;							//Iterationselement für Ursprungsliste
-
-		for (int i = 0; i < this.size; i++){						//solange Ende der Ursprungsliste nicht erreicht...
-			cloneList.postfix(new Entry<T>(entry.getElement()));	//erzeuge neues Entry und hänge es an die Liste
-			entry = entry.getNext();								//setze Iterations-Entry auf das Nächste
+	public List<T> clone() {
+		List<T> cloneList = new List<T>();
+		Entry<T> currentEntry = this.head;
+		while(currentEntry != null) {
+			cloneList.postfix(currentEntry.getElement());
+			currentEntry = currentEntry.getNext();
 		}
 		return cloneList;
 	}
@@ -120,7 +118,7 @@ public class List<T> {
 		List<T>  reverseList 		= new List<T>(); 				//initialisiere neue Liste
 		Entry<T> currentEntry		= this.head;					//Iterationselement für Ursprungsliste
 		//gehe Ursprungsliste durch und setze das jeweils aktuelle Element an den Anfang der reverseList
-		for (int counter = 0; counter <= this.size+1; counter++){
+		while(currentEntry != null) {
 			reverseList.prefix ( new Entry<T>( currentEntry.getElement() ) );
 			currentEntry = currentEntry.getNext();
 		}
